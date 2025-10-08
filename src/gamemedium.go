@@ -79,7 +79,7 @@ func (g *GameMedium) checkWin(row, col int) bool {
 	for c := col + 1; c < 9 && g.Board[row][c] == player; c++ {
 		count++
 	}
-	if count >= 4 {
+	if count >= 5 {
 		return true
 	}
 
@@ -89,47 +89,47 @@ func (g *GameMedium) checkWin(row, col int) bool {
 	for r := row + 1; r < 6 && g.Board[r][col] == player; r++ {
 		count++
 	}
-	if count >= 4 {
+	if count >= 5 {
 		return true
 	}
 
 	// Vérifie diagonal \
 	count = 1
-	for i := 1; i < 4; i++ {
+	for i := 1; i < 5; i++ {
 		r, c := row-i, col-i
 		if r < 0 || c < 0 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	for i := 1; i < 4; i++ {
+	for i := 1; i < 5; i++ {
 		r, c := row+i, col+i
 		if r >= 6 || c >= 9 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	if count >= 4 {
+	if count >= 5 {
 		return true
 	}
 
 	// Vérifie diagonal /
 	count = 1
-	for i := 1; i < 4; i++ {
+	for i := 1; i < 5; i++ {
 		r, c := row-i, col+i
 		if r < 0 || c >= 9 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	for i := 1; i < 4; i++ {
+	for i := 1; i < 5; i++ {
 		r, c := row+i, col-i
 		if r >= 6 || c < 0 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	return count >= 4
+	return count >= 5
 }
 
 // Vérifie si la grille est pleine
