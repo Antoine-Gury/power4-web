@@ -47,7 +47,7 @@ func (g *Gameeasy) PlayColumn(col int) bool {
 			}
 
 			// Vérifie match nul
-			if g.isFull() {
+			if g.isFulleasy() {
 				g.Winner = -1
 				g.GameOver = true
 				return true
@@ -133,7 +133,7 @@ func (g *Gameeasy) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *Game) isFull() bool {
+func (g *Game) isFulleasy() bool {
 	for col := 0; col < 7; col++ {
 		if g.Board[0][col] == 0 {
 			return false
