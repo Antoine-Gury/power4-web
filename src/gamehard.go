@@ -10,11 +10,11 @@ type Gamehard struct {
 }
 
 // Variable globale pour stocker le jeu
-var currentGamehard *Game
+var currentGamehard *Gamehard
 
 // Crée une nouvelle partie
 func InitGamehard() {
-	currentGame = &Game{
+	currentGamehard = &Gamehard{
 		CurrentPlayer: 1,
 		Winner:        0,
 		GameOver:      false,
@@ -22,12 +22,12 @@ func InitGamehard() {
 }
 
 // Récupère le jeu actuel
-func GetGamehard() *Game {
-	return currentGame
+func GetGamehard() *Gamehard {
+	return currentGamehard
 }
 
 // Joue dans une colonne (0 à 7)
-func (g *Game) PlayColumn(col int) bool {
+func (g *Gamehard) PlayColumn(col int) bool {
 	// Si partie finie ou colonne invalide
 	if g.GameOver || col < 0 || col >= 8 {
 		return false
@@ -66,7 +66,7 @@ func (g *Game) PlayColumn(col int) bool {
 }
 
 // Vérifie si quelqu'un a gagné
-func (g *Game) checkWin(row, col int) bool {
+func (g *Gamehard) checkWin(row, col int) bool {
 	player := g.Board[row][col]
 
 	// Vérifie horizontal
@@ -133,7 +133,7 @@ func (g *Game) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *Game) isFull() bool {
+func (g *Gamehard) isFull() bool {
 	for col := 0; col < 8; col++ {
 		if g.Board[0][col] == 0 {
 			return false
