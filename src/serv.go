@@ -33,9 +33,12 @@ func StartServer() {
 	InitGame()
 
 	// Définit les routes HTTP
-	http.HandleFunc("/", HomeHandler)       // Page d'accueil
-	http.HandleFunc("/play", PlayHandler)   // Jouer un coup
-	http.HandleFunc("/reset", ResetHandler) // Nouvelle partie
+	http.HandleFunc("/", HomeHandler)              // Menu principal
+	http.HandleFunc("/play-mode", PlayModeHandler) // Sélection du mode
+	http.HandleFunc("/game", GameHandler)          // Page de jeu
+	http.HandleFunc("/play", PlayHandler)          // Jouer un coup
+	http.HandleFunc("/reset", ResetHandler)        // Nouvelle partie
+	http.HandleFunc("/menu", MenuHandler)          // Retour au menu
 
 	// Trouve un port libre
 	port, err := findFreePort()
