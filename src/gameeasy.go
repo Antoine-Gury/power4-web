@@ -133,7 +133,7 @@ func (g *Gameeasy) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *Game) isFulleasy() bool {
+func (g *Gameeasy) isFulleasy() bool {
 	for col := 0; col < 7; col++ {
 		if g.Board[0][col] == 0 {
 			return false
