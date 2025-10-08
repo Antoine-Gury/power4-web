@@ -10,10 +10,10 @@ type GameMedium struct {
 }
 
 // Variable globale pour stocker le jeu
-var currentGameMedium *GameMedium
+var currentGamemedium *GameMedium
 
 // Crée une nouvelle partie
-func InitGame() {
+func InitGamemedium() {
 	currentGamemedium = &GameMedium{
 		CurrentPlayer: 1,
 		Winner:        0,
@@ -22,7 +22,7 @@ func InitGame() {
 }
 
 // Récupère le jeu actuel
-func GetGame() *GameMedium {
+func GetGamemedium() *GameMedium {
 	return currentGamemedium
 }
 
