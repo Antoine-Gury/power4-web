@@ -2,7 +2,7 @@
 package src
 
 // Structure du jeu
-type Game struct {
+type Gamehard struct {
 	Board         [7][8]int // Grille : 0=vide, 1=rouge, 2=jaune
 	CurrentPlayer int       // Joueur actuel (1 ou 2)
 	Winner        int       // 0=aucun, 1 ou 2=gagnant, -1=nul
@@ -10,10 +10,10 @@ type Game struct {
 }
 
 // Variable globale pour stocker le jeu
-var currentGame *Game
+var currentGamehard *Game
 
 // Crée une nouvelle partie
-func InitGame() {
+func InitGamehard() {
 	currentGame = &Game{
 		CurrentPlayer: 1,
 		Winner:        0,
@@ -22,7 +22,7 @@ func InitGame() {
 }
 
 // Récupère le jeu actuel
-func GetGame() *Game {
+func GetGamehard() *Game {
 	return currentGame
 }
 
