@@ -34,6 +34,9 @@ func PlayModeHandler(w http.ResponseWriter, r *http.Request) {
 	// Définit la difficulté actuelle
 	currentDifficulty = mode
 
+	// AJOUT : initialise une nouvelle partie pour le mode choisi
+	InitGame()
+
 	// Redirige vers la page de jeu
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
 }
@@ -44,13 +47,13 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 	var templateFile string
 	switch currentDifficulty {
 	case "easy":
-		templateFile = "templates/game_easy.html"
+		templateFile = "templates/gameeasy.html"
 	case "medium":
-		templateFile = "templates/game_medium.html"
+		templateFile = "templates/gamemedium.html"
 	case "hard":
-		templateFile = "templates/game_hard.html"
+		templateFile = "templates/gamehard.html"
 	default:
-		templateFile = "templates/game_classic.html"
+		templateFile = "templates/gameclassic.html"
 	}
 
 	// Charge le template correspondant
