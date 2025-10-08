@@ -10,7 +10,7 @@ type GameMedium struct {
 }
 
 // Variable globale pour stocker le jeu
-var currentGame *GameMedium
+var currentGameMedium *GameMedium
 
 // Crée une nouvelle partie
 func InitGame() {
