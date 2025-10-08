@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Puissance 4 - Mode Normal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        .board {
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(9, 60px); /* 9 colonnes */
+            gap: 5px;
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player1 {
+            background-color: red;
+        }
+
+        .player2 {
+            background-color: yellow;
+        }
+
+        .controls {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .turn-info {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .winner {
+            margin-top: 30px;
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Puissance 4 - Mode Normal</h1>
+    <p>Joueur actuel : <strong>{{.CurrentPlayerName}}</strong></p>
+
+    <div class="board">
+        {{range $i, $row := .Board}}
+            {{range $j, $cell := $row}}
+                <div class="cell {{if eq $cell 1}}player1{{else if eq $cell 2}}player2{{end}}">
+                    <!-- Optionnel : afficher 1 ou 2 -->
+                </div>
+            {{end}}
+        {{end}}
+    </div>
+
+    <div class="turn-info">
+        {{if .GameOver}}
+            {{if eq .Winner 1}} 🏆 Joueur Rouge a gagné ! {{else if eq .Winner 2}} 🏆 Joueur Jaune a gagné !
+            {{else if eq .Winner -1}} 🤝 Match nul ! {{end}}
+        {{else}}
+            C'est au tour du joueur {{.CurrentPlayerName}}.
+        {{end}}
+    </div>
+
+    <div class="controls">
+        <form action="/rematch" method="POST">
+            <button type="submit">Rejouer</button>
+        </form>
+        <form action="/" method="GET">
+            <button type="submit">Retour à l'accueil</button>
+        </form>
+    </div>
+
+</body>
+</html>
