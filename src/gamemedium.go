@@ -2,7 +2,7 @@
 package src
 
 // Structure du jeu
-type Game struct {
+type GameMedium struct {
 	Board         [6][9]int // Grille : 0=vide, 1=rouge, 2=jaune
 	CurrentPlayer int       // Joueur actuel (1 ou 2)
 	Winner        int       // 0=aucun, 1 ou 2=gagnant, -1=nul
@@ -10,11 +10,11 @@ type Game struct {
 }
 
 // Variable globale pour stocker le jeu
-var currentGame *Game
+var currentGame *GameMedium
 
 // Crée une nouvelle partie
 func InitGame() {
-	currentGame = &Game{
+	currentGamemedium = &GameMedium{
 		CurrentPlayer: 1,
 		Winner:        0,
 		GameOver:      false,
@@ -22,12 +22,12 @@ func InitGame() {
 }
 
 // Récupère le jeu actuel
-func GetGame() *Game {
-	return currentGame
+func GetGame() *GameMedium {
+	return currentGamemedium
 }
 
 // Joue dans une colonne (0 à 6)
-func (g *Game) PlayColumn(col int) bool {
+func (g *GameMedium) PlayColumn(col int) bool {
 	// Si partie finie ou colonne invalide
 	if g.GameOver || col < 0 || col >= 9 {
 		return false
@@ -66,7 +66,7 @@ func (g *Game) PlayColumn(col int) bool {
 }
 
 // Vérifie si quelqu'un a gagné
-func (g *Game) checkWin(row, col int) bool {
+func (g *GameMedium) checkWin(row, col int) bool {
 	player := g.Board[row][col]
 
 	// Vérifie horizontal
@@ -133,7 +133,7 @@ func (g *Game) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *Game) isFull() bool {
+func (g *GameMedium) isFull() bool {
 	for col := 0; col < 9; col++ {
 		if g.Board[0][col] == 0 {
 			return false
