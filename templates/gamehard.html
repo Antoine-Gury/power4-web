@@ -80,7 +80,7 @@
             margin: 20px 0;
         }
 
-        /* Style des boutons de colonne */
+        /* Style des boutons */
         button {
             width: 70px;
             height: 40px;
@@ -94,21 +94,22 @@
             transition: background-color 0.3s;
         }
 
-        /* Effet au survol des boutons */
         button:hover {
             background-color: #27ae60;
         }
 
-        /* Bouton désactivé si partie terminée */
         button:disabled {
             background-color: #95a5a6;
             cursor: not-allowed;
         }
 
-        /* Bouton pour nouvelle partie */
+        /* Boutons du bas */
+        .bottom-buttons {
+            margin-top: 20px;
+        }
+
         .reset-btn {
             background-color: #e67e22;
-            margin-top: 20px;
             padding: 10px 20px;
             width: auto;
         }
@@ -117,28 +118,34 @@
             background-color: #d35400;
         }
 
-        /* Message de victoire */
-        .winner {
+        .menu-btn {
+            background-color: #9b59b6;
+            padding: 10px 20px;
+            width: auto;
+            margin-left: 10px;
+        }
+
+        .menu-btn:hover {
+            background-color: #8e44ad;
+        }
+
+        /* Messages */
+        .winner, .draw {
             font-size: 28px;
             font-weight: bold;
             margin: 20px 0;
             padding: 15px;
-            background-color: #2ecc71;
-            color: white;
             border-radius: 10px;
+            color: white;
             display: inline-block;
         }
 
-        /* Message de match nul */
+        .winner {
+            background-color: #2ecc71;
+        }
+
         .draw {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 15px;
             background-color: #95a5a6;
-            color: white;
-            border-radius: 10px;
-            display: inline-block;
         }
     </style>
 </head>
@@ -165,7 +172,7 @@
         </div>
     {{end}}
 
-    <!-- Boutons pour choisir une colonne (seulement si partie en cours) -->
+    <!-- Boutons pour jouer -->
     {{if not .GameOver}}
     <div class="buttons">
         <form method="POST" action="/play" style="display: inline;">
@@ -180,7 +187,7 @@
     </div>
     {{end}}
 
-    <!-- Affichage de la grille -->
+    <!-- Grille -->
     <div class="board">
         {{range $rowIndex, $row := .Board}}
         <div class="row">
@@ -194,10 +201,13 @@
         {{end}}
     </div>
 
-    <!-- Bouton pour recommencer -->
-    <div>
-        <form method="POST" action="/reset">
+    <!-- Boutons du bas -->
+    <div class="bottom-buttons">
+        <form method="POST" action="/reset" style="display:inline;">
             <button type="submit" class="reset-btn">🔄 Nouvelle Partie</button>
+        </form>
+        <form action="/menu" style="display:inline;">
+            <button type="submit" class="menu-btn">🏠 Retour au menu principal</button>
         </form>
     </div>
 </body>

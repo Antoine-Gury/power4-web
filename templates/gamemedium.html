@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puissance 4</title>
     <style>
-        /* Style global de la page */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -14,30 +13,20 @@
             padding: 20px;
         }
 
-        /* Titre principal */
         h1 {
             color: #333;
             margin-bottom: 20px;
         }
 
-        /* Informations sur le joueur actuel */
         .info {
             font-size: 20px;
             margin: 20px 0;
             font-weight: bold;
         }
 
-        /* Couleur pour le joueur 1 (rouge) */
-        .player1 {
-            color: #e74c3c;
-        }
+        .player1 { color: #e74c3c; }
+        .player2 { color: #f3e412; }
 
-        /* Couleur pour le joueur 2 (jaune) */
-        .player2 {
-            color: #f39c12;
-        }
-
-        /* Conteneur de la grille */
         .board {
             display: inline-block;
             background-color: #3498db;
@@ -46,13 +35,11 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        /* Style d'une ligne de la grille */
         .row {
             display: flex;
             justify-content: center;
         }
 
-        /* Style d'une case */
         .cell {
             width: 60px;
             height: 60px;
@@ -65,22 +52,13 @@
             font-size: 24px;
         }
 
-        /* Case avec pion du joueur 1 */
-        .cell.player1 {
-            background-color: #e74c3c;
-        }
+        .cell.player1 { background-color: #e74c3c; }
+        .cell.player2 { background-color: #f3e412; }
 
-        /* Case avec pion du joueur 2 */
-        .cell.player2 {
-            background-color: #f39c12;
-        }
-
-        /* Conteneur des boutons pour jouer */
         .buttons {
             margin: 20px 0;
         }
 
-        /* Style des boutons de colonne */
         button {
             width: 70px;
             height: 40px;
@@ -94,18 +72,9 @@
             transition: background-color 0.3s;
         }
 
-        /* Effet au survol des boutons */
-        button:hover {
-            background-color: #27ae60;
-        }
+        button:hover { background-color: #27ae60; }
+        button:disabled { background-color: #95a5a6; cursor: not-allowed; }
 
-        /* Bouton désactivé si partie terminée */
-        button:disabled {
-            background-color: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        /* Bouton pour nouvelle partie */
         .reset-btn {
             background-color: #e67e22;
             margin-top: 20px;
@@ -113,39 +82,43 @@
             width: auto;
         }
 
-        .reset-btn:hover {
-            background-color: #d35400;
+        .reset-btn:hover { background-color: #d35400; }
+
+        /* Nouveau bouton menu */
+        .menu-btn {
+            background-color: #9b59b6;
+            margin-top: 20px;
+            padding: 10px 20px;
+            width: auto;
         }
 
-        /* Message de victoire */
-        .winner {
+        .menu-btn:hover { background-color: #8e44ad; }
+
+        .winner, .draw {
             font-size: 28px;
             font-weight: bold;
             margin: 20px 0;
             padding: 15px;
-            background-color: #2ecc71;
             color: white;
             border-radius: 10px;
             display: inline-block;
         }
 
-        /* Message de match nul */
-        .draw {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #95a5a6;
-            color: white;
-            border-radius: 10px;
-            display: inline-block;
+        .winner { background-color: #2ecc71; }
+        .draw { background-color: #95a5a6; }
+
+        /* Pour aligner les deux boutons côte à côte */
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>🎮 Puissance 4 🎮</h1>
 
-    <!-- Affichage du statut du jeu -->
     {{if .GameOver}}
         {{if eq .Winner -1}}
             <div class="draw">Match nul ! 🤝</div>
@@ -165,7 +138,6 @@
         </div>
     {{end}}
 
-    <!-- Boutons pour choisir une colonne (seulement si partie en cours) -->
     {{if not .GameOver}}
     <div class="buttons">
         <form method="POST" action="/play" style="display: inline;">
@@ -176,13 +148,10 @@
             <button type="submit" name="column" value="4">Col 5</button>
             <button type="submit" name="column" value="5">Col 6</button>
             <button type="submit" name="column" value="6">Col 7</button>
-            <button type="submit" name="column" value="7">col 8</button>
-            <button type="submit" name="column" value="8">col 9</button>
         </form>
     </div>
     {{end}}
 
-    <!-- Affichage de la grille -->
     <div class="board">
         {{range $rowIndex, $row := .Board}}
         <div class="row">
@@ -196,11 +165,15 @@
         {{end}}
     </div>
 
-    <!-- Bouton pour recommencer -->
-    <div>
+    <!-- Boutons Nouvelle Partie + Retour au Menu -->
+    <div class="bottom-buttons">
         <form method="POST" action="/reset">
             <button type="submit" class="reset-btn">🔄 Nouvelle Partie</button>
         </form>
+        <form method="GET" action="/menu">
+            <button type="submit" class="menu-btn">🏠 Retour au Menu</button>
+        </form>
     </div>
+
 </body>
 </html>
