@@ -34,7 +34,7 @@ func (g *Gamehard) PlayColumnhard(col int) bool {
 	}
 
 	// Trouve la première case vide en partant du bas
-	for row := 7; row >= 0; row-- {
+	for row := 6; row >= 0; row-- {
 		if g.Board[row][col] == 0 {
 			// Place le pion
 			g.Board[row][col] = g.CurrentPlayer
