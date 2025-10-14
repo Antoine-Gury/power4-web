@@ -27,7 +27,7 @@ func GetGamemedium() *GameMedium {
 }
 
 // Joue dans une colonne (0 à 6)
-func (g *GameMedium) PlayColumn(col int) bool {
+func (g *GameMedium) PlayColumnmedium(col int) bool {
 	// Si partie finie ou colonne invalide
 	if g.GameOver || col < 0 || col >= 9 {
 		return false
@@ -40,14 +40,14 @@ func (g *GameMedium) PlayColumn(col int) bool {
 			g.Board[row][col] = g.CurrentPlayer
 
 			// Vérifie victoire
-			if g.checkWin(row, col) {
+			if g.checkWinmedium(row, col) {
 				g.Winner = g.CurrentPlayer
 				g.GameOver = true
 				return true
 			}
 
 			// Vérifie match nul
-			if g.isFull() {
+			if g.isFullmedium() {
 				g.Winner = -1
 				g.GameOver = true
 				return true
@@ -66,7 +66,7 @@ func (g *GameMedium) PlayColumn(col int) bool {
 }
 
 // Vérifie si quelqu'un a gagné
-func (g *GameMedium) checkWin(row, col int) bool {
+func (g *GameMedium) checkWinmedium(row, col int) bool {
 	player := g.Board[row][col]
 
 	// Vérifie horizontal
@@ -133,7 +133,7 @@ func (g *GameMedium) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *GameMedium) isFull() bool {
+func (g *GameMedium) isFullmedium() bool {
 	for col := 0; col < 9; col++ {
 		if g.Board[0][col] == 0 {
 			return false

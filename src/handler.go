@@ -34,8 +34,17 @@ func PlayModeHandler(w http.ResponseWriter, r *http.Request) {
 	// Définit la difficulté actuelle
 	currentDifficulty = mode
 
-	// AJOUT : initialise une nouvelle partie pour le mode choisi
-	InitGame()
+	// Initialise une nouvelle partie selon le mode
+	switch mode {
+	case "easy":
+		InitGameeasy() // Appelle la version easy
+	case "medium":
+		InitGamemedium() // Appelle la version medium
+	case "hard":
+		InitGamehard() // Appelle la version hard
+	default:
+		InitGame() // Classic
+	}
 
 	// Redirige vers la page de jeu
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
@@ -65,11 +74,21 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Récupère l'état actuel du jeu
-	game := GetGame()
+	// Récupère l'état actuel du jeu selon la difficulté
+	var gameData interface{}
+	switch currentDifficulty {
+	case "easy":
+		gameData = GetGameeasy() // Récupère le jeu easy
+	case "medium":
+		gameData = GetGamemedium() // Récupère le jeu medium
+	case "hard":
+		gameData = GetGamehard() // Récupère le jeu hard
+	default:
+		gameData = GetGame() // Classic
+	}
 
 	// Affiche le template avec les données du jeu
-	tmpl.Execute(w, game)
+	tmpl.Execute(w, gameData)
 }
 
 // Handler pour jouer un coup (route POST /play)
@@ -86,11 +105,21 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Récupère le jeu actuel
-	game := GetGame()
-
-	// Joue dans la colonne choisie
-	game.PlayColumn(col)
+	// Joue dans la colonne selon la difficulté
+	switch currentDifficulty {
+	case "easy":
+		game := GetGameeasy()
+		game.PlayColumneasy(col) // Appelle la version easy
+	case "medium":
+		game := GetGamemedium()
+		game.PlayColumnmedium(col) // Appelle la version medium
+	case "hard":
+		game := GetGamehard()
+		game.PlayColumnhard(col) // Appelle la version hard
+	default:
+		game := GetGame()
+		game.PlayColumn(col) // Classic
+	}
 
 	// Redirige vers la page de jeu pour afficher le résultat
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
@@ -98,8 +127,17 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler pour recommencer une partie (route POST /reset)
 func ResetHandler(w http.ResponseWriter, r *http.Request) {
-	// Crée une nouvelle partie
-	InitGame()
+	// Crée une nouvelle partie selon la difficulté actuelle
+	switch currentDifficulty {
+	case "easy":
+		InitGameeasy()
+	case "medium":
+		InitGamemedium()
+	case "hard":
+		InitGamehard()
+	default:
+		InitGame() // Classic
+	}
 
 	// Redirige vers la page de jeu
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
@@ -107,9 +145,6 @@ func ResetHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler pour retourner au menu (route GET /menu)
 func MenuHandler(w http.ResponseWriter, r *http.Request) {
-	// Réinitialise le jeu
-	InitGame()
-
 	// Redirige vers le menu principal
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

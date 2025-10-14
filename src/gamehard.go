@@ -27,7 +27,7 @@ func GetGamehard() *Gamehard {
 }
 
 // Joue dans une colonne (0 à 7)
-func (g *Gamehard) PlayColumn(col int) bool {
+func (g *Gamehard) PlayColumnhard(col int) bool {
 	// Si partie finie ou colonne invalide
 	if g.GameOver || col < 0 || col >= 8 {
 		return false
@@ -40,14 +40,14 @@ func (g *Gamehard) PlayColumn(col int) bool {
 			g.Board[row][col] = g.CurrentPlayer
 
 			// Vérifie victoire
-			if g.checkWin(row, col) {
+			if g.checkWinhard(row, col) {
 				g.Winner = g.CurrentPlayer
 				g.GameOver = true
 				return true
 			}
 
 			// Vérifie match nul
-			if g.isFull() {
+			if g.isFullhard() {
 				g.Winner = -1
 				g.GameOver = true
 				return true
@@ -66,7 +66,7 @@ func (g *Gamehard) PlayColumn(col int) bool {
 }
 
 // Vérifie si quelqu'un a gagné
-func (g *Gamehard) checkWin(row, col int) bool {
+func (g *Gamehard) checkWinhard(row, col int) bool {
 	player := g.Board[row][col]
 
 	// Vérifie horizontal
@@ -133,7 +133,7 @@ func (g *Gamehard) checkWin(row, col int) bool {
 }
 
 // Vérifie si la grille est pleine
-func (g *Gamehard) isFull() bool {
+func (g *Gamehard) isFullhard() bool {
 	for col := 0; col < 8; col++ {
 		if g.Board[0][col] == 0 {
 			return false

@@ -27,7 +27,7 @@ func GetGameeasy() *Gameeasy {
 }
 
 // Joue dans une colonne (0 à 6)
-func (g *Gameeasy) PlayColumn(col int) bool {
+func (g *Gameeasy) PlayColumneasy(col int) bool {
 	// Si partie finie ou colonne invalide
 	if g.GameOver || col < 0 || col >= 7 {
 		return false
@@ -40,7 +40,7 @@ func (g *Gameeasy) PlayColumn(col int) bool {
 			g.Board[row][col] = g.CurrentPlayer
 
 			// Vérifie victoire
-			if g.checkWin(row, col) {
+			if g.checkWineasy(row, col) {
 				g.Winner = g.CurrentPlayer
 				g.GameOver = true
 				return true
@@ -65,8 +65,8 @@ func (g *Gameeasy) PlayColumn(col int) bool {
 	return false // Colonne pleine
 }
 
-// Vérifie si quelqu'un a gagné
-func (g *Gameeasy) checkWin(row, col int) bool {
+// Vérifie si quelqu'un a gagné (avec 3 pions alignés)
+func (g *Gameeasy) checkWineasy(row, col int) bool {
 	player := g.Board[row][col]
 
 	// Vérifie horizontal
@@ -79,7 +79,7 @@ func (g *Gameeasy) checkWin(row, col int) bool {
 	for c := col + 1; c < 7 && g.Board[row][c] == player; c++ {
 		count++
 	}
-	if count >= 3 {
+	if count >= 3 { // MODIFIÉ : 3 au lieu de 4
 		return true
 	}
 
@@ -89,47 +89,47 @@ func (g *Gameeasy) checkWin(row, col int) bool {
 	for r := row + 1; r < 6 && g.Board[r][col] == player; r++ {
 		count++
 	}
-	if count >= 3 {
+	if count >= 3 { // MODIFIÉ : 3 au lieu de 4
 		return true
 	}
 
 	// Vérifie diagonal \
 	count = 1
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 3; i++ { // MODIFIÉ : i < 3 au lieu de i < 4
 		r, c := row-i, col-i
 		if r < 0 || c < 0 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 3; i++ { // MODIFIÉ : i < 3 au lieu de i < 4
 		r, c := row+i, col+i
 		if r >= 6 || c >= 7 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	if count >= 3 {
+	if count >= 3 { // MODIFIÉ : 3 au lieu de 4
 		return true
 	}
 
 	// Vérifie diagonal /
 	count = 1
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 3; i++ { // MODIFIÉ : i < 3 au lieu de i < 4
 		r, c := row-i, col+i
 		if r < 0 || c >= 7 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 3; i++ { // MODIFIÉ : i < 3 au lieu de i < 4
 		r, c := row+i, col-i
 		if r >= 6 || c < 0 || g.Board[r][c] != player {
 			break
 		}
 		count++
 	}
-	return count >= 3
+	return count >= 3 // MODIFIÉ : 3 au lieu de 4
 }
 
 // Vérifie si la grille est pleine
