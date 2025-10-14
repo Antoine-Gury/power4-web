@@ -65,7 +65,7 @@ func (g *Gameeasy) PlayColumneasy(col int) bool {
 	return false // Colonne pleine
 }
 
-// Vérifie si quelqu'un a gagné (avec 3 pions alignés)
+// Vérifie si quelqu'un a gagné
 func (g *Gameeasy) checkWineasy(row, col int) bool {
 	player := g.Board[row][col]
 
