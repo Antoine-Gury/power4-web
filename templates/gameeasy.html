@@ -117,6 +117,18 @@
             background-color: #d35400;
         }
 
+        /* Bouton retour au menu */
+        .menu-btn {
+            background-color: #9b59b6;
+            margin-top: 10px;
+            padding: 10px 20px;
+            width: auto;
+        }
+
+        .menu-btn:hover {
+            background-color: #8e44ad;
+        }
+
         /* Message de victoire */
         .winner {
             font-size: 28px;
@@ -194,10 +206,14 @@
         {{end}}
     </div>
 
-    <!-- Bouton pour recommencer -->
+    <!-- Boutons sous la grille -->
     <div>
         <form method="POST" action="/reset">
             <button type="submit" class="reset-btn">🔄 Nouvelle Partie</button>
+        </form>
+
+        <form method="GET" action="/menu">
+            <button type="submit" class="menu-btn">🏠 Retour au menu</button>
         </form>
     </div>
 </body>
