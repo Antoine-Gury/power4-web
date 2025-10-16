@@ -1,174 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puissance 4</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #8FA1FA;
-            margin: 0;
-            padding: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puissance 4 - Classic</title>
+<style>
+body { font-family: Arial; text-align: center; background-color: #8FA1FA; margin: 0; padding: 20px; }
+h1 { color: #333; margin-bottom: 20px; }
+.info { font-size: 20px; margin: 20px 0; font-weight: bold; }
+.player1 { color: #e74c3c; }
+.player2 { color: #f3d512; }
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+.board { display: inline-block; background-color: #3498db; padding: 20px; border-radius: 10px; }
+.row { display: flex; justify-content: center; }
+.cell { width: 80px; height: 80px; margin: 5px; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+.cell.player1 { background-color: #e74c3c; }
+.cell.player2 { background-color: #f3d512; }
 
-        .info {
-            font-size: 20px;
-            margin: 20px 0;
-            font-weight: bold;
-        }
+.winner { font-size: 28px; font-weight: bold; margin: 20px 0; padding: 15px; background-color: #2ecc71; color: white; border-radius: 10px; display: inline-block; }
+.draw { font-size: 28px; font-weight: bold; margin: 20px 0; padding: 15px; background-color: #95a5a6; color: white; border-radius: 10px; display: inline-block; }
 
-        .player1 { color: #e74c3c; }
-        .player2 { color: #f39c12; }
+.bottom-buttons { margin-top: 20px; }
+.reset-btn { background-color: #e67e22; padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer; }
+.menu-btn { background-color: #9b59b6; padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer; margin-left: 10px; }
+.reset-btn:hover { background-color: #d35400; }
+.menu-btn:hover { background-color: #8e44ad; }
 
-        .board {
-            display: inline-block;
-            background-color: #3498db;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .row { display: flex; justify-content: center; }
-
-        .cell {
-            width: 60px;
-            height: 60px;
-            margin: 5px;
-            border-radius: 50%;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .cell.player1 { background-color: #e74c3c; }
-        .cell.player2 { background-color: #f39c12; }
-
-        .buttons { margin: 20px 0; }
-
-        button {
-            width: 70px;
-            height: 40px;
-            margin: 0 5px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover { background-color: #27ae60; }
-        button:disabled { background-color: #95a5a6; cursor: not-allowed; }
-
-        .reset-btn {
-            background-color: #e67e22;
-            margin-top: 20px;
-            padding: 10px 20px;
-            width: auto;
-        }
-
-        .reset-btn:hover { background-color: #d35400; }
-
-        /* Nouveau bouton pour retour au menu */
-        .menu-btn {
-            background-color: #9b59b6;
-            margin-top: 20px;
-            padding: 10px 20px;
-            width: auto;
-        }
-
-        .menu-btn:hover { background-color: #8e44ad; }
-
-        .winner, .draw {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 15px;
-            color: white;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        .winner { background-color: #2ecc71; }
-        .draw { background-color: #95a5a6; }
-
-        /* Pour aligner les deux boutons côte à côte */
-        .bottom-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-    </style>
+</style>
 </head>
 <body>
-    <h1>🎮 Puissance 4 🎮</h1>
+<h1>🎮 Puissance 4 - Classic 🎮</h1>
 
-    {{if .GameOver}}
-        {{if eq .Winner -1}}
-            <div class="draw">Match nul ! 🤝</div>
-        {{else if eq .Winner 1}}
-            <div class="winner">Le joueur 1 (Rouge) a gagné ! 🎉</div>
-        {{else if eq .Winner 2}}
-            <div class="winner">Le joueur 2 (Jaune) a gagné ! 🎉</div>
-        {{end}}
-    {{else}}
-        <div class="info">
-            C'est au tour du 
-            {{if eq .CurrentPlayer 1}}
-                <span class="player1">Joueur 1 (Rouge)</span>
-            {{else}}
-                <span class="player2">Joueur 2 (Jaune)</span>
-            {{end}}
-        </div>
+<!-- AJOUT : Vérification de fin de partie -->
+{{if .GameOver}}
+    {{if eq .Winner -1}}
+        <div class="draw">Match nul ! 🤝</div>
+    {{else if eq .Winner 1}}
+        <div class="winner">Le joueur 1 (Rouge) a gagné ! 🎉</div>
+    {{else if eq .Winner 2}}
+        <div class="winner">Le joueur 2 (Jaune) a gagné ! 🎉</div>
     {{end}}
-
-    {{if not .GameOver}}
-    <div class="buttons">
-        <form method="POST" action="/play" style="display: inline;">
-            <button type="submit" name="column" value="0">Col 1</button>
-            <button type="submit" name="column" value="1">Col 2</button>
-            <button type="submit" name="column" value="2">Col 3</button>
-            <button type="submit" name="column" value="3">Col 4</button>
-            <button type="submit" name="column" value="4">Col 5</button>
-            <button type="submit" name="column" value="5">Col 6</button>
-            <button type="submit" name="column" value="6">Col 7</button>
-        </form>
+{{else}}
+    <!-- Si la partie n'est pas finie, affiche le joueur actuel -->
+    <div class="info">
+    Joueur actuel : <span class="{{if eq .CurrentPlayer 1}}player1{{else}}player2{{end}}">
+    {{if eq .CurrentPlayer 1}}Joueur 1 (Rouge){{else}}Joueur 2 (Jaune){{end}}
+    </span>
     </div>
+{{end}}
+
+<!-- Plateau -->
+<div class="board">
+{{range $r, $row := .Board}}
+  <div class="row">
+    {{range $c, $cell := $row}}
+      <form method="POST" action="/play" style="display:inline;">
+        <input type="hidden" name="column" value="{{$c}}">
+        <button type="submit" class="cell {{if eq $cell 1}}player1{{else if eq $cell 2}}player2{{end}}">
+        </button>
+      </form>
     {{end}}
+  </div>
+{{end}}
+</div>
 
-    <div class="board">
-        {{range $rowIndex, $row := .Board}}
-        <div class="row">
-            {{range $colIndex, $cell := $row}}
-            <div class="cell 
-                {{if eq $cell 1}}player1{{end}}
-                {{if eq $cell 2}}player2{{end}}">
-            </div>
-            {{end}}
-        </div>
-        {{end}}
-    </div>
-
-    <!-- Boutons Nouvelle Partie + Retour au Menu -->
-    <div class="bottom-buttons">
-        <form method="POST" action="/reset">
-            <button type="submit" class="reset-btn">🔄 Nouvelle Partie</button>
-        </form>
-        <form method="GET" action="/menu">
-            <button type="submit" class="menu-btn">🏠 Retour au Menu</button>
-        </form>
-    </div>
+<!-- Boutons du bas -->
+<div class="bottom-buttons">
+  <form method="POST" action="/reset" style="display:inline;">
+    <button type="submit" class="reset-btn">🔄 Nouvelle Partie</button>
+  </form>
+  <form action="/menu" style="display:inline;">
+    <button type="submit" class="menu-btn">🏠 Retour au menu principal</button>
+  </form>
+</div>
 
 </body>
 </html>

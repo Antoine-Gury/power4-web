@@ -3,7 +3,7 @@ package main
 
 // Import du package qui gère le serveur
 import (
-	"power4/src" // Package contenant la logique du serveur
+	src "power4/src/go" // Package contenant la logique du serveur
 )
 
 // Fonction principale - lance simplement le serveur
