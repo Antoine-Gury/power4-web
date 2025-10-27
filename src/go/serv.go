@@ -3,7 +3,7 @@ package src
 
 // Import des packages nécessaires
 import (
-	"fmt"      // Pour formater et afficher du texte
+	"fmt"      // Pour afficher du texte
 	"log"      // Pour gérer les logs et erreurs
 	"net"      // Pour trouver un port libre
 	"net/http" // Pour créer le serveur HTTP
@@ -31,6 +31,9 @@ func findFreePort() (int, error) {
 func StartServer() {
 	// Initialise une nouvelle partie de Power4
 	InitGame()
+
+	// Servir les fichiers statiques
+	StaticHandler()
 
 	// Définit les routes HTTP
 	http.HandleFunc("/", HomeHandler)              // Menu principal

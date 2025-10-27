@@ -148,3 +148,11 @@ func MenuHandler(w http.ResponseWriter, r *http.Request) {
 	// Redirige vers le menu principal
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+// StaticHandler configure le serveur pour servir les fichiers CSS, JS et images
+func StaticHandler() {
+	// Crée un serveur de fichiers pour le dossier "assets"
+	fs := http.FileServer(http.Dir("assets"))
+	// Expose le dossier via l'URL /assets/
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+}
