@@ -112,24 +112,24 @@ Aucun test unitaire automatisé n’a été écrit : les comportements (placemen
 
 Les limites actuelles :
 
-Voici quelques exemples pour t’inspirer (tu peux choisir ou ajouter les tiennes) :
+- une seule partie possible à la fois
+- pas de sauvegarde des parties
+- aucune IA / bot pour jouer
+- pas d’animations
+- aucune base de données
 
-une seule partie possible à la fois
+Les pistes d’amélioration :
 
-pas de sauvegarde des parties
+- Ajouter une IA basique pour jouer contre l’ordinateur
+- Ajouter plusieurs parties en parallèle
+- Intégrer une base de données pour sauvegarder l’historique des parties
+- Améliorer l’interface (animations, design responsive)
+- Ajouter un système utilisateur / scores
 
-aucune IA / bot pour jouer
-
-interface simple, pas responsive
-
-pas d’animations
-
-pas de test unitaire
-
-architecture basique (pas d’API, pas de sessions)
-
-code Go pas encore découpé en plusieurs fichiers
-
+## Crédits & licence
+- Auteur : Développé par Gury Antoine/Tembe Randy/Safia
+- Contributeurs : Aucun contributeur 
+- Licence : aucune
 
 
 
